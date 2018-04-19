@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css/gis8990.css">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/map.js"></script>
+
+	<title>Arctic DEM Usage</title>
+</head>
+<body>
+	<div class="topnav">
+		<a class="active" href="#home">Home</a>
+		<a href="#arctic">Arctic DEM</a>
+		<a href="#example">Example</a>
+		<a href="#"></a>
+	</div>
+	<div class="container">
+		<div id="home" class="col-md-12">
+			<p class="h1">Landscape Change in Arctic Regions</p>
+		</div>
+		<div class="row">
+			<div id="arctic" class="col-md-6">
+				<p class="h3">Introduction to Arctic DEM</p>
+				<p class="h4">Purpose</p>
+				<p>
+					The ArcticDEM project is a response to the need for high quality elevation data in remote locations, the availability of technology to process big data, and the need for accurate measurement of topographic change.
+				<br><br>
+					ArcticDEM will encompass all land area north of 60°N. In addition, coverage will include all territory of Greenland, the State of Alaska in entirety, and the Kamchatka Peninsula of the Russian Federation.
+				</p>
+				<p class="h4">Source</p>
+				<p>
+					ArcticDEM data is constructed from in-track, high-resolution (~0.5 meter) imagery acquired by the DigitalGlobe constellation of optical imaging satellites and licensed through the NGA NextView contact.
+				<br><br>
+					The majority of ArcticDEM data was generated from the panchromatic bands of the WorldView-1, WorldView-2, and WorldView-3 satellites. A small percentage of data was also generated from the GeoEye-1 satellite sensor.
+				</p>
+				<p class="h4">Output</p>
+				<p>
+					Output DEM raster files are available as both “strip” files and mosaic files that are compiled from multiple strips that have been co-registered, blended, and feathered to reduce edge-matching artifacts.
+				<br><br>
+					The strip DEM files allows users to perform change detection analysis and to compare observations of topography data acquired in different seasons or years. The mosaic DEM tiles are assembled from multiple strip DEMs with the intention of providing a more consistent and comprehensive product over larger areas.
+				</p>
+			</div>
+			<div class="col-md-6">
+				<img id="image" src="img/ArcticDEM-Domain-Map.jpg" alt="ArcticDEM-Map">
+				<figcaption><i>ArcticDEM domain shown in black.</i></figcaption>
+			</div>
+			<div id="example" class="col-md-6">
+		</div>
+	</div>
+</body>
+</html>
