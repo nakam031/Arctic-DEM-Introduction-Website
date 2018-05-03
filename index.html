@@ -4,25 +4,60 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/gis8990.css">
+	<link rel="stylesheet" href="css/responsive-nav.css">
+	<link rel="stylesheet" href="css/styles.css">
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
 	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script src="js/responsive-nav.js"></script>
 	<script type="text/javascript" src="js/map.js"></script>
 
 	<title>Arctic DEM Usage</title>
 </head>
 <body>
-	<div class="topnav">
+	<nav class="nav-collapse">
+		<ul>
+			<li><a href="#home">Home</a></li>
+			<li><a href="#project">Project</a></li>
+			<li><a href="#arctic">Arctic DEM</a></li>
+			<li><a href="#result">Result</a></li>
+		</ul>
+	</nav>
+	<!-- <div class="topnav">
 		<a class="active" href="#home">Home</a>
 		<a href="#arctic">Arctic DEM</a>
 		<a href="#example">Example</a>
 		<a href="#"></a>
+	</div> -->
+	<div class="container-fluid">
+		<div id="home" class="introimage col-md-12">
+			<div id="intro">Landscape Changes in Arctic Region</div>
+		</div>
 	</div>
 	<div class="container">
-		<div id="home" class="col-md-12">
-			<p class="h1">Landscape Change in Arctic Regions</p>
+		<div id="project" class="col-md-12">
+			<p class="h1">Performing Change Detection Analysis</p>
+			<br>
+			<p class="h3">Introduction</p>
+			<p class="h4">Project Scope</p>
+			<p>
+				In my GIS 8990 Independent class, I decided to use Polar Geospatial Center's ArcticDEM strip product to conduct a landscape change detection analysis in Arctic region.<br><br>
+				The research goals are to
+				<ul>
+					<li>Explore the usage and limitation of ArcticDEM Strips</li>
+					<li>Demonstrate and visualize the change detection analysis and share with people</li>
+				</ul>
+			</p>
+			<br>
+			<p class="h4">Data and Technologies</p>
+			<p>
+				I used a privilege of working at the Polar Geospatial Center to obtain, process, and explore the ArcticDEM, 2m Panchromatic Imagery data. <br>
+				Point fire data was obtained from NASA's <a href="https://earthdata.nasa.gov/earth-observation-data/near-real-time/firms/active-fire-data" target="_blank">EARTHDATA</a>, and polygon fire data was obtained from <a href="http://cwfis.cfs.nrcan.gc.ca/datamart" target="_blank">Canadian WIldland Fire Information System</a>.<br>
+				<br>
+				ArcGIS Desktop 10.51 and ArcGIS Online were used for the analysis.
+			</p>
 		</div>
-		<div class="row">
+		<!-- <div class="row"> -->
 			<div id="arctic" class="col-md-6">
 				<p class="h3">Introduction to Arctic DEM</p>
 				<p class="h4">Purpose</p>
@@ -48,8 +83,39 @@
 				<img id="image" src="img/ArcticDEM-Domain-Map.jpg" alt="ArcticDEM-Map">
 				<figcaption><i>ArcticDEM domain shown in black.</i></figcaption>
 			</div>
-			<div id="example" class="col-md-6">
-		</div>
+			<div id ="result" class="col-md-6">
+				<p class="h3">Example of Using Arctic DEM</p>
+				<p class="h4">Fire in Canada</p>
+				<p>The map shows the location points where fire were detected in Canada in 2016. The data is filtered to show only the points above 60&#176; latitude with 85% or more confidence. </p>
+
+
+			</div>
+			<div id="map" class="col-md-6 embed-container">
+				<iframe width="500" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="Canada Fire Locations in 2016 (above Lat +60)" src="http://umn.maps.arcgis.com/apps/Embed/index.html?webmap=0c5c3bbccfd34e2782ff973f2878099e&extent=-148.5396,59.462,-96.772,70.0919&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light""></iframe>
+			</div>
+		<!-- </div> -->
 	</div>
+
+
+<script>
+	var nav = responsiveNav(".nav-collapse");
+</script>
+	<!-- <script>
+	  var navigation = responsiveNav(".nav-collapse", {
+	    animate: true,                    // Boolean: Use CSS3 transitions, true or false
+	    transition: 284,                  // Integer: Speed of the transition, in milliseconds
+	    label: "Menu",                    // String: Label for the navigation toggle
+	    insert: "after",                  // String: Insert the toggle before or after the navigation
+	    customToggle: "",                 // Selector: Specify the ID of a custom toggle
+	    closeOnNavClick: false,           // Boolean: Close the navigation when one of the links are clicked
+	    openPos: "relative",              // String: Position of the opened nav, relative or static
+	    navClass: "nav-collapse",         // String: Default CSS class. If changed, you need to edit the CSS too!
+	    navActiveClass: "js-nav-active",  // String: Class that is added to <html> element when nav is active
+	    jsClass: "js",                    // String: 'JS enabled' class which is added to <html> element
+	    init: function(){},               // Function: Init callback
+	    open: function(){},               // Function: Open callback
+	    close: function(){}               // Function: Close callback
+	    });
+	 </script> -->
 </body>
 </html>
