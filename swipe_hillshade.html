@@ -2,8 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
-  <title>Swipe Hillshade</title>
+  <title>Layer Swipe</title>
   <link rel="stylesheet" href="https://js.arcgis.com/3.24/esri/themes/calcite/dijit/calcite.css">
   <link rel="stylesheet" href="https://js.arcgis.com/3.24/esri/themes/calcite/esri/esri.css">
   <style>
@@ -19,20 +18,27 @@
 
     require([
       "esri/map", 
+      "esri/SpatialReference",
       "esri/dijit/LayerSwipe",
       "esri/arcgis/utils",
       "dojo/_base/array",
       "dojo/domReady!"
     ], function(
-      Map, LayerSwipe, arcgisUtils, array 
+      Map, SpatialReference, LayerSwipe, arcgisUtils, array 
     )  {
 
-      var mapDeferred = arcgisUtils.createMap("c77fbac370584e33a16d184b96879d32", "map");
-      mapDeferred.then(function(response){
+var customExtentAndSR = new esri.geometry.Extent( -2834392,-962218,-2717046,-905430,new esri.SpatialReference({"wkid":3995}));
+        //create map with new custom spatial reference and extent.  The map will be in the Goode Homolosine Land projection
+         var createMapOptions = {
+      mapOptions: { extent: customExtentAndSR}}; 
+      
+      var mapDeferred = arcgisUtils.createMap("c77fbac370584e33a16d184b96879d32", "map", createMapOptions);
 
+      mapDeferred.then(function(response){
         var id;
         var map = response.map;
         var title = "The Northwest Territories Hillshade 2014";
+
         
         //loop through all the operational layers in the web map 
         //to find the one with the specified title;
@@ -57,6 +63,8 @@
             layers: [swipeLayer]
           }, "swipeDiv");
           swipeWidget.startup();
+
+        
         }
       });
 
