@@ -18,16 +18,21 @@
 
     require([
       "esri/map", 
+      "esri/geometry/Extent",
       "esri/SpatialReference",
       "esri/dijit/LayerSwipe",
       "esri/arcgis/utils",
       "dojo/_base/array",
+      "esri/dijit/Legend",
+      "dojo/parser",
+      "digit/layout/BorderContainer",
+      "digit/layout/AccordionContainer",
       "dojo/domReady!"
     ], function(
-      Map, SpatialReference, LayerSwipe, arcgisUtils, array 
+      Map, Extent, SpatialReference, LayerSwipe, arcgisUtils, array, Legend 
     )  {
 
-var customExtentAndSR = new esri.geometry.Extent( -2834392,-962218,-2717046,-905430,new esri.SpatialReference({"wkid":3995}));
+var customExtentAndSR = new Extent(-2837392,-962218,-2709404,-883564,new SpatialReference({"wkid":3413}));
         //create map with new custom spatial reference and extent.  The map will be in the Goode Homolosine Land projection
          var createMapOptions = {
       mapOptions: { extent: customExtentAndSR}}; 
@@ -67,14 +72,16 @@ var customExtentAndSR = new esri.geometry.Extent( -2834392,-962218,-2717046,-905
         
         }
       });
-
+//        var legend = new Legend({
+//            map:map,
+//            layerInfos:(arcgisUtils.getLegendLayers(response))
+//        },"legendDiv");
+//        legend.startup();
     });
   </script>
 
 </head>
 <body class="calcite">
-  <div id="map" class="map">
     <div id="swipeDiv"></div>
-  </div>
 </body>
 </html>
