@@ -7,10 +7,8 @@
 	<link rel="stylesheet" href="css/responsive-nav.css">
 	<link rel="stylesheet" href="css/styles.css">
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
-	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script src="js/responsive-nav.js"></script>
-	<script type="text/javascript" src="js/map.js"></script>
+	<!-- <script type="text/javascript" src="js/gis8990.js"></script> -->
 
 	<title>Arctic DEM Usage</title>
 </head>
@@ -57,8 +55,9 @@
 				ArcGIS Desktop 10.51 and ArcGIS Online were used for the analysis.
 			</p>
 		</div>
-		<!-- <div class="row"> -->
-			<div id="arctic" class="col-md-6">
+		<div id="arctic" class="col-md-12">
+
+			<div id="arcticintro" class="col-md-6">
 				<p class="h3">Introduction to Arctic DEM</p>
 				<p class="h4">Purpose</p>
 				<p>
@@ -83,22 +82,49 @@
 				<img id="image" src="img/ArcticDEM-Domain-Map.jpg" alt="ArcticDEM-Map">
 				<figcaption><i>ArcticDEM domain shown in black.</i></figcaption>
 			</div>
-			<div id ="result" class="col-md-6">
+		</div>
+		<div id="result" class="col-md-12">
+			<div id="resultintro" class="col-md-4">
 				<p class="h3">Example of Using Arctic DEM</p>
 				<p class="h4">Fire in Canada</p>
-				<p>The map shows the location points where fire were detected in Canada in 2016. The data is filtered to show only the points above 60&#176; latitude with 85% or more confidence. </p>
+				<p>The map shows the location points where fire were detected in Canada in 2016. The data is filtered to show only the points above 60&#176; latitude with 85% or more confidence. All the fires are detected in the Northwest Territories.<br>
+				If you click the points, you will be able to see the details of the fire. The pop up shows the following information:
+				<ul>
+					<li>Date when the fire was detected</li>
+					<li>Brightness of the fire.(This indicates how strong the fire is)</li>
+					<li>The exact time when the satellite detected the fire</li>
+					<li>The Satellite name</li>
+					<li>Confidence (100 is the max)</li>
+				</ul>
 
+				Click the Study Area button to zoom in to the study area for this project.<br>
+				The pink polygon shows the damaged area from the wildfire started in July 2016. This data is from LANDSAT. You could see many fire points inside the polygon, and those points are detected between July and August.<br><br>
+				The primary reason of selecting this location was the availability of the DEM and cloud free imagery with small amount of holes.<br><br>
 
+			</p>
 			</div>
-			<div id="map" class="col-md-6">
-				<div class="embed-container"><iframe width="500" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="Canada Fire Locations in 2016 (above Lat +60)" src="http://umn.maps.arcgis.com/apps/Embed/index.html?webmap=0c5c3bbccfd34e2782ff973f2878099e&extent=-148.5396,59.462,-96.772,70.0919&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light"></iframe></div>
+			<div id="mapone" class="col-md-8">
+				<div class="embed-container"><iframe width="500" height="300" frameborder="0.1" scrolling="no" marginheight="0" marginwidth="0" title="Canada Fire Locations in 2016 (above Lat +60)" src="canada_fire.html" id="mapframe"></iframe></div>
 			</div>
-		<!-- </div> -->
+		</div>
 	</div>
 
 
 <script>
 	var nav = responsiveNav(".nav-collapse");
+	// var x = window.innerWidth;
+	// var y = window.innerHeight;
+	
+	// if (x<800 && x>=700){
+	// 	$("#mapframe").content().find("#title").css("font-size","20px");
+	// }
+	// else if (x<700 && x>=500){
+	// 	$("#mapframe").content().find("#title").css("font-size","15px");
+
+	// }
+	// else if (x<500){
+	// 	$("#mapframe").content().find("#title").css("display":"none");
+	// }
 </script>
 	<!-- <script>
 	  var navigation = responsiveNav(".nav-collapse", {

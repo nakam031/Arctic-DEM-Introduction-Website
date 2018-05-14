@@ -2,18 +2,14 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
   <title>Layer Swipe</title>
   <link rel="stylesheet" href="https://js.arcgis.com/3.24/esri/themes/calcite/dijit/calcite.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/3.24/dijit/themes/claro/claro.css">
   <link rel="stylesheet" href="https://js.arcgis.com/3.24/esri/themes/calcite/esri/esri.css">
-  <style>
-    html, body, #map {
-      padding:0;
-      margin:0;
-      height:100%;
-      position:relative;
-    }
-  </style>
-  <script src="https://js.arcgis.com/3.24/"></script>
+  <script src="https://js.arcgis.com/3.24/" data-dojo-config="async:true"></script>
+  
+  <!-- <script src="https://js.arcgis.com/3.24/"></script> -->
   <script>
 
     require([
@@ -25,16 +21,22 @@
       "dojo/_base/array",
       "esri/dijit/Legend",
       "dojo/parser",
-      "digit/layout/BorderContainer",
-      "digit/layout/AccordionContainer",
+      "dojo/dom",
+      "dojo/ready",
+      "dijit/layout/BorderContainer",
+      "dijit/layout/ContentPane",
+      "esri/dijit/HomeButton",
       "dojo/domReady!"
     ], function(
-      Map, Extent, SpatialReference, LayerSwipe, arcgisUtils, array, Legend 
+      Map, Extent, SpatialReference, LayerSwipe, arcgisUtils, array, Legend, parser,dom,ready,BorderContainer,ContentPane,HomeButton
     )  {
+      ready(function(){
+        parser.parse();
 
-var customExtentAndSR = new Extent(-2837392,-962218,-2709404,-883564,new SpatialReference({"wkid":3413}));
+
+      var customExtentAndSR = new Extent(-2834392,-922218,-2717046,-915430,new SpatialReference({"wkid":3413}));
         //create map with new custom spatial reference and extent.  The map will be in the Goode Homolosine Land projection
-         var createMapOptions = {
+      var createMapOptions = {
       mapOptions: { extent: customExtentAndSR}}; 
       
       var mapDeferred = arcgisUtils.createMap("c77fbac370584e33a16d184b96879d32", "map", createMapOptions);
@@ -44,6 +46,8 @@ var customExtentAndSR = new Extent(-2837392,-962218,-2709404,-883564,new Spatial
         var map = response.map;
         var title = "The Northwest Territories Hillshade 2014";
 
+        dom.byId("title").innerHTML= response.itemInfo.item.title;
+        dom.byId("subtitle").innerHTML = response.itemInfo.item.snippet;
         
         //loop through all the operational layers in the web map 
         //to find the one with the specified title;
@@ -68,9 +72,12 @@ var customExtentAndSR = new Extent(-2837392,-962218,-2709404,-883564,new Spatial
             layers: [swipeLayer]
           }, "swipeDiv");
           swipeWidget.startup();
-
-        
         }
+
+        var home = new HomeButton({
+          map:map
+        },"HomeButton");
+        home.startup();
       });
 //        var legend = new Legend({
 //            map:map,
@@ -78,10 +85,77 @@ var customExtentAndSR = new Extent(-2837392,-962218,-2709404,-883564,new Spatial
 //        },"legendDiv");
 //        legend.startup();
     });
+  });
   </script>
+  <style>
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
 
+      body {
+        font-family: "Segoe UI";
+      }
+
+      #header {
+        background-color: #E8E8E8;
+        height: 65px;
+        margin: 5px 5px;
+      }
+
+      #mainWindow {
+        width: 100%;
+        height: 100%;
+      }
+
+      #title {
+        padding-top: 2px;
+        /*padding-left: 10px;*/
+        font-size: 18pt;
+        font-weight: 700;
+        text-align:center;
+      }
+
+      #subtitle {
+        font-size: small;
+        text-align:center;
+        /*padding-left: 40px;*/
+      }
+
+      /*#rightPane {
+        background-color: #E8E8E8;
+        margin: 5px;
+        width: 20%;
+      }*/
+
+      #map {
+        margin: 5px;
+        padding: 0;
+      }
+
+      #HomeButton{
+        position:absolute;
+        top:100px;
+        left:15px;
+        z-index:50;
+      }
+
+  </style>
 </head>
 <body class="calcite">
-    <div id="swipeDiv"></div>
+  <div id="mainWindow" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline'">
+    <div id="header" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'">
+      <div id="title"></div>
+      <div id="subtitle"></div>
+    </div>
+    <div id="map" class="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">
+        <div id="HomeButton"></div>
+        <div id="swipeDiv"></div>
+    </div>
+  </div>
 </body>
+
 </html>
