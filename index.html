@@ -106,6 +106,22 @@
 			<div id="mapone" class="col-md-8">
 				<div class="embed-container"><iframe width="500" height="300" frameborder="0.1" scrolling="no" marginheight="0" marginwidth="0" title="Canada Fire Locations in 2016 (above Lat +60)" src="canada_fire.html" id="mapframe"></iframe></div>
 			</div>
+			<div id="resultimagery" class="col-md-4">
+				<!-- <p class="h3"></p> -->
+				<p class="h4">Process</p>
+				<p>The following is the procedure I took:
+					<ol>
+						<li>Download ArcticDEM Strips and associated orthorectified images from PGC database.</li>
+						<li>Created mosaic images and DEM of 2014 and 2016.</li>
+						<li>Created hillshade layers from the mosaic DEM.</li>
+						<li>Uploaded layers as a WMS to the ArcGIS server.</li>
+						<li>Visualize mosaic images and hillshade using ArcGIS API for Javascript (ver. 3.24).</li>
+					</ol>
+					All the geo-processing were done by ArcGIS Desktop 10.5.<br>
+					All the layers from 2016 are obtained after the wildfire (September, October, and November). Layers from 2014 were selected since study area in 2015 had a heavy cloud coverage.
+				</p>
+			</div>
+
 		</div>
 	</div>
 
