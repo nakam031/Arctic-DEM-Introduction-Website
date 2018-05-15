@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+  <title>Layer Swipe</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/3.24/esri/themes/calcite/dijit/calcite.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/3.24/dijit/themes/claro/claro.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/3.24/esri/themes/calcite/esri/esri.css">
+  <script src="https://js.arcgis.com/3.24/" data-dojo-config="async:true"></script>
+  
+  <!-- <script src="https://js.arcgis.com/3.24/"></script> -->
+  <script>
+
+    require([
+      "esri/map", 
+      "esri/geometry/Extent",
+      "esri/SpatialReference",
+      "esri/dijit/LayerSwipe",
+      "esri/arcgis/utils",
+      "dojo/_base/array",
+      "esri/dijit/Legend",
+      "dojo/parser",
+      "dojo/dom",
+      "dojo/ready",
+      "dijit/layout/BorderContainer",
+      "dijit/layout/ContentPane",
+      "esri/dijit/HomeButton",
+      "dojo/domReady!"
+    ], function(
+      Map, Extent, SpatialReference, LayerSwipe, arcgisUtils, array, Legend, parser,dom,ready,BorderContainer,ContentPane,HomeButton
+    )  {
+      ready(function(){
+        parser.parse();
+
+
+      var customExtentAndSR = new Extent(-2834392,-922218,-2717046,-915430,new SpatialReference({"wkid":3413}));
+        //create map with new custom spatial reference and extent.  The map will be in the Goode Homolosine Land projection
+      var createMapOptions = {
+      mapOptions: { extent: customExtentAndSR}}; 
+      
+      var mapDeferred = arcgisUtils.createMap("411360a249874586b9f999c542ddf332", "map", createMapOptions);
+
+      mapDeferred.then(function(response){
+        var id;
+        var map = response.map;
+        var title = "The Northwest Territories Image 2014";
+
+        dom.byId("title").innerHTML= response.itemInfo.item.title;
+        dom.byId("subtitle").innerHTML = response.itemInfo.item.snippet;
+        
+        //loop through all the operational layers in the web map 
+        //to find the one with the specified title;
+        var layers = response.itemInfo.itemData.operationalLayers;
+        array.some(layers, function(layer){
+          if(layer.title === title){
+            id = layer.id;
+            if(layer.featureCollection && layer.featureCollection.layers.length){
+              id = layer.featureCollection.layers[0].id;
+            }
+            return true;  
+          }else{
+            return false;
+          }
+        });
+        //get the layer from the map using the id and set it as the swipe layer. 
+        if(id){
+          var swipeLayer = map.getLayer(id);
+          var swipeWidget = new LayerSwipe({
+            type: "vertical",  //Try switching to "scope" or "horizontal"
+            map: map,
+            layers: [swipeLayer]
+          }, "swipeDiv");
+          swipeWidget.startup();
+        }
+
+        var home = new HomeButton({
+          map:map
+        },"HomeButton");
+        home.startup();
+      });
+//        var legend = new Legend({
+//            map:map,
+//            layerInfos:(arcgisUtils.getLegendLayers(response))
+//        },"legendDiv");
+//        legend.startup();
+    });
+  });
+  </script>
+  <style>
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI";
+      }
+
+      #header {
+        background-color: #E8E8E8;
+        height: 65px;
+        margin: 5px 5px;
+      }
+
+      #mainWindow {
+        width: 100%;
+        height: 100%;
+      }
+
+      #title {
+        padding-top: 2px;
+        /*padding-left: 10px;*/
+        font-size: 18pt;
+        font-weight: 700;
+        text-align:center;
+      }
+
+      #subtitle {
+        font-size: small;
+        text-align:center;
+        /*padding-left: 40px;*/
+      }
+
+      /*#rightPane {
+        background-color: #E8E8E8;
+        margin: 5px;
+        width: 20%;
+      }*/
+
+      #map {
+        margin: 5px;
+        padding: 0;
+      }
+
+      #HomeButton{
+        position:absolute;
+        top:100px;
+        left:15px;
+        z-index:50;
+      }
+
+  </style>
+</head>
+<body class="calcite">
+  <div id="mainWindow" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline'">
+    <div id="header" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'">
+      <div id="title"></div>
+      <div id="subtitle"></div>
+    </div>
+    <div id="map" class="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">
+        <div id="HomeButton"></div>
+        <div id="swipeDiv"></div>
+    </div>
+  </div>
+</body>
+
+</html>
