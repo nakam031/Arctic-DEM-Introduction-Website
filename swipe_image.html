@@ -18,6 +18,7 @@
       "esri/SpatialReference",
       "esri/dijit/LayerSwipe",
       "esri/arcgis/utils",
+      "esri/dijit/Bookmarks",
       "dojo/_base/array",
       "esri/dijit/Legend",
       "dojo/parser",
@@ -28,19 +29,19 @@
       "esri/dijit/HomeButton",
       "dojo/domReady!"
     ], function(
-      Map, Extent, SpatialReference, LayerSwipe, arcgisUtils, array, Legend, parser,dom,ready,BorderContainer,ContentPane,HomeButton
+      Map, Extent, SpatialReference, LayerSwipe, arcgisUtils, Bookmarks, array, Legend, parser,dom,ready,BorderContainer,ContentPane,HomeButton
     )  {
       ready(function(){
         parser.parse();
 
 
-      var customExtentAndSR = new Extent(-2834392,-922218,-2717046,-915430,new SpatialReference({"wkid":3413}));
+      var customExtentAndSR = new Extent(-2783446.151,-931522.585,-2755882.429,-905401.507,new SpatialReference({"wkid":3413}));
         //create map with new custom spatial reference and extent.  The map will be in the Goode Homolosine Land projection
       var createMapOptions = {
       mapOptions: { extent: customExtentAndSR}}; 
       
       var mapDeferred = arcgisUtils.createMap("411360a249874586b9f999c542ddf332", "map", createMapOptions);
-
+      // var map = response.map;
       mapDeferred.then(function(response){
         var id;
         var map = response.map;
@@ -78,12 +79,41 @@
           map:map
         },"HomeButton");
         home.startup();
-      });
-//        var legend = new Legend({
-//            map:map,
-//            layerInfos:(arcgisUtils.getLegendLayers(response))
-//        },"legendDiv");
-//        legend.startup();
+
+
+        var bookmarks_list = [{
+                          "extent":{
+                            "spatialReference":{
+                              "wkid": 3413
+                            },
+                            "xmin":-2756943.442,
+                            "ymin":-925315.592,
+                            "xmax":-2755190.838,
+                            "ymax":-924029.715
+                          },
+                          "name":"Example 1"
+                        },{
+                          "extent":{
+                            "spatialReference":{
+                              "wkid":3413
+                            },
+                            "xmin":-2762200.152,
+                            "ymin":-928220.038,
+                            "xmax":-2759658.03,
+                            "ymax":-926389.117
+                          },
+                          "name":"Example 2"
+                        }
+                      ];
+
+                      var bookmarks = new Bookmarks({
+                        map: map,
+                        bookmarks:bookmarks_list
+                      }, dojo.byId("bookmarks"));
+
+
+        });
+
     });
   });
   </script>
@@ -141,7 +171,19 @@
         top:100px;
         left:15px;
         z-index:50;
+
       }
+      .bookmark-container {
+        position: absolute;
+        top: 150px;
+        left: 15px;
+        padding: 1rem;
+        background: #ffffff;
+        border-radius: 4px;
+        border: 1px solid #eeeeee;
+        z-index: 50;
+      }
+    
 
   </style>
 </head>
@@ -153,6 +195,9 @@
     </div>
     <div id="map" class="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">
         <div id="HomeButton"></div>
+        <div class="bookmark-container">
+          <div id="bookmarks"></div>
+        </div>
         <div id="swipeDiv"></div>
     </div>
   </div>
