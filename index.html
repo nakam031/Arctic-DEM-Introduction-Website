@@ -122,15 +122,35 @@
 				</p>
 			</div>
 			<div id="imagemap" class="col-md-4">
-				<p class="h4">High Resolution Imagery</p>
+				<p class="h4">High Resolution Images Comparison</p>
 				<p>
 					The map has two layers: panchromatic mosaic imagery from 2014 and 2016. You can use the swipe bar to see the changes.<br> The base layer shows the mosaic imagery from 2016. If you swipe the bar to the right, the mosaic imagery from 2014 will appear.<br><br>
 					(The reason why 2014 image looks darker is because of the shadow effect.)<br><br>
-					Click example 1 and example 2 to zoom into the locations where you can see the affect of wildfire.
+					Click example 1 and example 2 to zoom into the locations. If you swipe vertically you can see the affect of wildfire.<br><br>
+					Example 1: It is difficult to tell the difference due to the difference in sun light affect, but you will be able to see the tree loss in upper part of the small island. <br><br>
+					Example 2: In 2016, there are many areas with dark plain texture. If you swipe to the left to see the 2014 imagery, you will be able to see the difference in color and texture. This shows that those areas (with dark plain texture) had tree coverage in 2014. 
 				</p>
 			</div>
 			<div id="maptwo" class="col-md-8">
 				<div class="embed-container"><iframe width="500" height="300" frameborder="0.1" scrolling="no" marginheight="0" marginwidth="0" title="Canada Fire Damage Panchromatic Imagery 2014 & 2016" src="swipe_image.html" id="mapframe"></iframe></div>
+			</div>
+			<div id="hillshademap" class="col-md-4">
+				<p class="h4">Hillshade Comparison</p>
+				<p>
+					The map has two layer like the "Canada Fire Damage Panchromatic Images": hillshade from 2014 and 2016. You can use the swip bar to see the changes with this map as well.<br><br>
+					The base layer shows the hillshade from 2016. If you swipe the bar vertically to the right, the hillshade layer from 2014 will appear.<br><br>
+					The hillshade map has two same example locations as the imagery map. <br>
+					Both example shows that there were land change between 2014 and 2016 since 2016 has more rough surface compared to 2014. 
+				</p>
+				<p class="h4">Limitation</p>
+				<p>
+					The limitation I found for this project is the data availability. Even though Arctic DEM mosaic coverage is spectacular, it was hard to find strips with clean whole free cloud free and snow free data within the desired time frame. <br><br>
+					When I looked into summer DEM in Alaska where the wildfire was detected for 2014, 2015, and 2016, most of the strips are covered with clouds.<br><br>
+					There is aslo aligning error that cannot be fixed without co-registration process. I was not able to apply this method due to the limited time. Therefore, this could be the process I can consider to add in the future study. 
+				</p>
+			</div>
+			<div id="mapthree" class="col-md-8">
+				<div class="embed-container"><iframe width="500" height="300" frameborder="0.1" scrolling="no" marginheight="0" marginwidth="0" title="Canada Fire Damage Hillshade 2014 & 2016" src="swipe_hillshade.html" id="mapframe"></iframe></div>
 			</div>
 
 		</div>

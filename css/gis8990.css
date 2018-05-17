@@ -105,7 +105,7 @@ p, li{
 	/*border:1px solid green;*/
 }
 
-#arcticintro{
+#arcticintro,#resultintro{
 	padding:20px;
 
 	/*border:1px solid red;*/
@@ -114,17 +114,23 @@ figcaption{
 	padding-left:30px;
 	margin-bottom:30px;
 }
-
-#resultintro{
-	padding:20px;
-	left:0;
-	/*position:relative;*/
-	/*border:1px solid red;*/
+/*#result{
+	position:relative;
+	margin-top:50px;
 }
+*/
+
 #mapone{
 	margin-top:100px;
 	margin-bottom:50px;
 	/*border:1px solid blue;*/
+}
+#imagemap{
+	margin-top:50px;
+}
+#maptwo{
+	margin-top:100px;
+	margin-bottom:50px;
 }
 .embed-container {
 	position: relative; 
