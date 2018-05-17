@@ -19,7 +19,7 @@
       "esri/dijit/LayerSwipe",
       "esri/arcgis/utils",
       "dojo/_base/array",
-      "esri/dijit/Legend",
+      "esri/dijit/Bookmarks",
       "dojo/parser",
       "dojo/dom",
       "dojo/ready",
@@ -28,7 +28,7 @@
       "esri/dijit/HomeButton",
       "dojo/domReady!"
     ], function(
-      Map, Extent, SpatialReference, LayerSwipe, arcgisUtils, array, Legend, parser,dom,ready,BorderContainer,ContentPane,HomeButton
+      Map, Extent, SpatialReference, LayerSwipe, arcgisUtils, array, Bookmarks, parser,dom,ready,BorderContainer,ContentPane,HomeButton
     )  {
       ready(function(){
         parser.parse();
@@ -78,6 +78,37 @@
           map:map
         },"HomeButton");
         home.startup();
+
+        var bookmarks_list = [{
+          "extent":{
+            "spatialReference":{
+              "wkid": 3413
+            },
+            "xmin":-2756943.442,
+            "ymin":-925315.592,
+            "xmax":-2755190.838,
+            "ymax":-924029.715
+          },
+          "name":"Example 1"
+        },{
+          "extent":{
+            "spatialReference":{
+              "wkid":3413
+            },
+            "xmin":-2762200.152,
+            "ymin":-928220.038,
+            "xmax":-2759658.03,
+            "ymax":-926389.117
+          },
+          "name":"Example 2"
+        }
+      ];
+
+      var bookmarks = new Bookmarks({
+        map: map,
+        bookmarks:bookmarks_list
+      }, dojo.byId("bookmarks"));
+
       });
 //        var legend = new Legend({
 //            map:map,
@@ -142,7 +173,17 @@
         left:15px;
         z-index:50;
       }
-
+      .bookmark-container {
+        position: absolute;
+        top: 150px;
+        left: 15px;
+        padding: 1rem;
+        background: #ffffff;
+        border-radius: 4px;
+        border: 1px solid #eeeeee;
+        z-index: 50;
+      }
+    
   </style>
 </head>
 <body class="calcite">
@@ -153,6 +194,9 @@
     </div>
     <div id="map" class="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">
         <div id="HomeButton"></div>
+        <div class="bookmark-container">
+          <div id="bookmarks"></div>
+        </div>
         <div id="swipeDiv"></div>
     </div>
   </div>
